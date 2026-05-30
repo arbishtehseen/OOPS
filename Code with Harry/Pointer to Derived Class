@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+
+class Base{
+	public:
+		int var_base;
+		
+		void display() {
+			cout<<"Displaying Base Class Variable : "<<var_base<<endl;
+		}
+};
+
+class Derived : public Base{
+	public:
+		int var_derived;
+		
+		void display() {
+			cout<<"Displaying Base Class Variable : "<<var_base<<endl;
+			cout<<"Displaying Derived Class Variable : "<<var_derived<<endl;
+		}
+};
+
+int main(){
+	Base *ptr;
+	Base obj_base;
+	Derived obj_derived;
+	
+	ptr = &obj_derived;
+	
+	// pointer of baseclass can point towards object of derived class.
+	/* lekin if m is pointer se display call kroungi toh display derivedclass ka call nh hoga
+	blke baseclass ka call hoga, kio ke ye pointer baseclass ka h
+    */
+    ptr->var_base = 34;
+    ptr->display();
+    
+    // this is known as late binding. jese ke pointer jis class ka h ussi ke display ko call krrha h.
+    
+    /* ptr->var_derived = 90;  it'll throw error
+    it aint valid.
+    - agr apne baseclass se pointer bnaya and derivedclass se point krva diya, toh ap
+    srf un methods and varibales ko access krskte hou jo inherit huve hein baseclass se derived class mae.
+    
+    */
+    
+    Derived* ptr_d;
+    Derived obj_der;
+    ptr_d = &obj_derived;
+    
+    ptr_d->var_derived = 9800;
+    ptr_d->var_base = 944;
+    ptr_d->display();
+    
+    
+    
+	return 0;
+}
